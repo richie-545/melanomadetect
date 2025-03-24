@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MelanoCheck</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    /* Global Styles */
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      background: #f4f7f6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    /* Navbar */
+    .navbar {
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #2c3e50;
+    }
+    .nav-link {
+      font-weight: 500;
+      margin-right: 1rem;
+    }
+    .nav-link:hover {
+      color: #0056b3;
+    }
+    /* Sections */
+    section {
+      padding: 80px 0;
+      opacity: 0;
+      transition: opacity 1s ease-out;
+    }
+    .section-visible {
+      opacity: 1;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    /* Hero Section with parallax effect */
+    #home {
+      background: url("{{ url_for('static', filename='images/melanoma.jpg') }}") no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      padding-top: 80px;
+    }
+    #home h1 {
+      font-size: 3rem;
+      color: #2c3e50;
+    }
+    #home p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+    #home .btn-primary {
+      background-color: #2c3e50;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+    }
+    #home .btn-primary:hover {
+      background-color: #34495e;
+    }
+    /* Analysis Section */
+    #analysis {
+      background: #f9f9f9;
+    }
+    #analysis .form-section {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    /* Progress bar style */
+    #progressContainer {
+      display: none;
+      margin-top: 1rem;
+    }
+    /* Footer */
+    footer {
+      background: #343a40;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+    footer a {
+      color: #ffc107;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand" href="#home">MelanoCheck</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#disclaimer">Disclaimer</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#analysis">Analysis</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modelInfoModal">Model Info</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="animate__animated">
+    <div class="container">
+      <h1 class="animate__fadeInDown">MelanoCheck</h1>
+      <p class="animate__fadeInUp">Your AI-based tool for preliminary skin lesion analysis.</p>
+      <a href="#analysis" class="btn btn-primary mt-4 animate__fadeInUp">Start Skin Analysis</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="animate__animated">
+    <div class="container">
+      <h2 class="section-title">About MelanoCheck</h2>
+      <div class="content">
+        <p>Melanoma is a serious form of skin cancer that originates in the pigment-producing cells called melanocytes. Early detection is critical, as treatments are much more effective in the initial stages.</p>
+        <p><strong>Benign</strong> lesions are non-cancerous and do not spread, while <strong>malignant</strong> lesions are cancerous and can invade nearby tissues and spread to other parts of the body. MelanoCheck uses cutting-edge AI technology to help provide a preliminary risk assessment.</p>
+        <p>Our tool analyzes images of skin lesions to estimate the likelihood of melanoma. It is intended for testing purposes only and should not replace professional medical advice.</p>
+        <img src="https://via.placeholder.com/800x400?text=Melanoma+Example" alt="Melanoma Example">
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer Section -->
+  <section id="disclaimer" class="bg-light animate__animated">
+    <div class="container">
+      <h2 class="section-title">Disclaimer</h2>
+      <div class="content">
+        <p>This tool is designed for testing and educational purposes only. It does not provide medical advice, diagnosis, or treatment. If you have concerns about your health, please consult a qualified healthcare provider immediately.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="animate__animated">
+    <div class="container">
+      <h2 class="section-title">Contact</h2>
+      <div class="content">
+        <p>For inquiries or further information, please email <a href="mailto:your.email@example.com">your.email@example.com</a>.</p>
+        <img src="https://via.placeholder.com/600x300?text=Contact+Us" alt="Contact Us">
+      </div>
+    </div>
+  </section>
+
+  <!-- Analysis Section -->
+  <section id="analysis" class="bg-light animate__animated">
+    <div class="container">
+      <h2 class="section-title">Test Your Skin Lesion</h2>
+      <div class="form-section">
+        <p>Upload a high-quality image of your skin lesion to receive an AI-based prediction. <em>This tool is for testing purposes only.</em></p>
+        <label for="fileInput" class="form-label">Choose an Image</label>
+        <input class="form-control" type="file" id="fileInput" accept="image/*">
+        <button class="btn btn-dark mt-3" onclick="uploadImage()">Predict</button>
+        <!-- Progress bar for longer processing times -->
+        <div id="progressContainer" class="progress mt-3">
+          <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+               role="progressbar" style="width: 0%;"></div>
+        </div>
+        <!-- Preview -->
+        <div id="previewContainer" class="mt-4" style="display: none;">
+          <h5>Image Preview:</h5>
+          <img id="preview" src="#" alt="Image Preview" class="img-fluid rounded">
+        </div>
+        <!-- Result -->
+        <div id="result" class="mt-4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Model Explanation Modal -->
+  <div class="modal fade" id="modelInfoModal" tabindex="-1" aria-labelledby="modelInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modelInfoModalLabel">How MelanoCheck Works</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>MelanoCheck uses a deep learning model that has been trained on thousands of skin lesion images to evaluate risk. The model extracts features from the image using a convolutional neural network (CNN) and refines these features with Transformer-based layers. This process helps the model identify subtle patterns that differentiate benign lesions from malignant ones.</p>
+          <p>Please note, the tool is designed for preliminary screening only and does not replace professional medical advice.</p>
+          <img src="https://via.placeholder.com/600x300?text=Model+Architecture" alt="Model Architecture" class="img-fluid rounded">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2025 MelanoCheck. All Rights Reserved.</p>
+      <p>For inquiries, contact <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Animate sections when they come into view using IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add("animate__fadeIn");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    document.querySelectorAll("section").forEach(section => {
+      observer.observe(section);
+    });
+
+    // File upload preview
+    document.getElementById("fileInput").addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const previewContainer = document.getElementById("previewContainer");
+        const preview = document.getElementById("preview");
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          previewContainer.style.display = "block";
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+
+    function uploadImage() {
+      const fileInput = document.getElementById("fileInput");
+      if (fileInput.files.length === 0) {
+        alert("Please select an image!");
+        return;
+      }
+      
+      const resultDiv = document.getElementById("result");
+      const progressContainer = document.getElementById("progressContainer");
+      const progressBar = document.getElementById("progressBar");
+      resultDiv.innerHTML = "";
+      progressContainer.style.display = "block";
+      progressBar.style.width = "0%";
+
+      // Simulate progress (for demonstration; adjust as needed)
+      let progress = 0;
+      const progressInterval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = progress + "%";
+        if (progress >= 100) {
+          clearInterval(progressInterval);
+        }
+      }, 200);
+
+      const formData = new FormData();
+      formData.append("file", fileInput.files[0]);
+
+      fetch("/predict", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        progressBar.style.width = "100%";
+        setTimeout(() => { progressContainer.style.display = "none"; }, 500);
+        if (data.prediction === "Malignant") {
+          resultDiv.innerHTML = `
+            <div class="alert alert-danger">
+              <strong>Result:</strong> High Chance of Melanoma Detected.<br>
+              <strong>Confidence:</strong> ${data.confidence}<br>
+              <em>Please consult your doctor immediately.</em>
+            </div>
+          `;
+        } else {
+          resultDiv.innerHTML = `
+            <div class="alert alert-success">
+              <strong>Result:</strong> Low Chance of Melanoma Detected.<br>
+              <strong>Confidence:</strong> ${data.confidence}<br>
+              <em>This result is for testing purposes only.</em>
+            </div>
+          `;
+        }
+      })
+      .catch(error => {
+        progressContainer.style.display = "none";
+        console.error("Error:", error);
+        resultDiv.innerHTML = `
+          <div class="alert alert-danger">
+            An error occurred. Please try again.
+          </div>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>
